@@ -1,52 +1,51 @@
 # CLAUDE.md
 
-> This file provides context and guidance for Claude working in this repository.
-> Customize every section marked with `TODO` before committing.
+> This file provides context and guidance for Claude working in any repository under the **blindbet** GitHub organization.
+> Individual repositories may add their own `CLAUDE.md` to override or extend these defaults.
 
 ---
 
 ## Project Overview
 
-**Name:** <!-- TODO: Project / service name -->
+**Name:** blindbet / `.github`
 
-**Purpose:** <!-- TODO: One or two sentences describing what this repo does and why it exists -->
+**Purpose:** Holds GitHub org-level defaults — community health files, issue/PR templates, and AI guidance — for the *blindbet* organization. Individual repos override by placing the same file at the same path inside their own repository.
 
-**Owner / Team:** <!-- TODO: Team name or Slack channel -->
+**Owner / Team:** @lpiedade
 
-**Type:** <!-- TODO: e.g. REST API, React SPA, CLI tool, shared library, data pipeline… -->
+**Type:** GitHub organization defaults repository (meta-repo, no deployable code)
 
 ---
 
 ## Tech Stack
 
-<!-- TODO: Fill in the actual technologies used -->
+This repository contains only Markdown and YAML — there is no runtime or build step. The table below reflects org-wide tooling used across service repositories.
 
 | Layer | Technology |
 |---|---|
-| Language | <!-- e.g. TypeScript 5.x / Python 3.12 --> |
-| Runtime / Framework | <!-- e.g. Node 20 / FastAPI / Next.js 14 --> |
-| Database | <!-- e.g. PostgreSQL 15 / DynamoDB --> |
-| Infrastructure | <!-- e.g. AWS ECS / Vercel / GCP Cloud Run --> |
-| Package manager | <!-- e.g. pnpm / poetry / cargo --> |
-| Test runner | <!-- e.g. Vitest / pytest / Jest --> |
-| CI/CD | <!-- e.g. GitHub Actions / CircleCI --> |
+| Docs format | Markdown (CommonMark), en-US |
+| Package manager | pnpm (service repos) |
+| CI/CD | GitHub Actions |
+| IaC | Terraform / Docker / Kubernetes (`infra` repo) |
 
 ---
 
 ## Repository Structure
 
 ```
-.
-├── src/                  # TODO: describe main source layout
-│   ├── ...
-├── tests/                # Unit & integration tests
-├── docs/                 # Additional documentation
-├── scripts/              # Dev / ops helper scripts
-└── CLAUDE.md             # ← you are here
+.github/
+├── ISSUE_TEMPLATE/         # bug_report.yml, feature_request.yml, config.yml
+├── profile/                # GitHub org profile README
+├── CLAUDE.md               # ← you are here (org-level AI guidance)
+├── CODE_OF_CONDUCT.md
+├── COMMIT_CONVENTION.md    # Canonical commit type/scope reference
+├── CONTRIBUTING.md
+├── LICENSE
+├── PULL_REQUEST_TEMPLATE.md
+├── README.md
+├── SECURITY.md
+└── SUPPORT.md
 ```
-
-<!-- TODO: Expand or replace the tree above to match the actual layout. -->
-<!-- Briefly note any non-obvious directories or naming conventions. -->
 
 ---
 
@@ -55,95 +54,16 @@
 ### Prerequisites
 
 ```bash
-# TODO: list required tools and versions
-# e.g.
-# node >= 20
-# pnpm >= 9
-# python >= 3.12
+git  # that's all — no build or install step
 ```
 
-### Install dependencies
+### Validate issue templates (optional)
 
 ```bash
-# TODO: replace with the actual install command
-pnpm install
+# Requires Node on PATH
+npx js-yaml ISSUE_TEMPLATE/bug_report.yml
+npx js-yaml ISSUE_TEMPLATE/feature_request.yml
 ```
-
-### Environment setup
-
-```bash
-# Copy the example env file and fill in secrets
-cp .env.example .env
-```
-
-<!-- TODO: List any required environment variables that have no defaults -->
-
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | Connection string for the primary DB | ✅ |
-| `API_KEY` | <!-- TODO --> | ✅ |
-
----
-
-## Common Commands
-
-<!-- TODO: keep this list current — it is the single source of truth for day-to-day dev tasks -->
-
-```bash
-# Development
-pnpm dev          # Start local dev server
-pnpm build        # Production build
-pnpm start        # Run production build locally
-
-# Testing
-pnpm test         # Run all tests
-pnpm test:unit    # Unit tests only
-pnpm test:e2e     # End-to-end tests
-pnpm test:watch   # Watch mode
-
-# Code quality
-pnpm lint         # Lint source files
-pnpm lint:fix     # Auto-fix lint issues
-pnpm format       # Run formatter (Prettier / Black / …)
-pnpm typecheck    # Type-check without emitting
-
-# Database (if applicable)
-pnpm db:migrate   # Run pending migrations
-pnpm db:seed      # Seed development data
-pnpm db:reset     # Drop, recreate, migrate, seed
-```
-
----
-
-## Architecture
-
-### High-level design
-
-<!-- TODO: Describe the main components and how data flows through the system.
-     A short paragraph or simple ASCII diagram is fine. -->
-
-```
-Client → API Gateway → [Service A] → Database
-                     ↘ [Service B] → External API
-```
-
-### Key modules / packages
-
-<!-- TODO: List the most important source modules and what each is responsible for -->
-
-| Module | Responsibility |
-|---|---|
-| `src/api` | HTTP route handlers and request validation |
-| `src/services` | Business logic, decoupled from transport layer |
-| `src/db` | Database models and query helpers |
-| `src/lib` | Shared utilities and cross-cutting concerns |
-
-### External dependencies & integrations
-
-<!-- TODO: List third-party services this repo calls -->
-
-- **[Service name]** — purpose, auth method
-- **[Service name]** — purpose, auth method
 
 ---
 
@@ -151,117 +71,111 @@ Client → API Gateway → [Service A] → Database
 
 ### General
 
-- **Language**: <!-- TODO: TypeScript strict mode / Python type hints required / … -->
-- **Formatting**: <!-- TODO: Prettier (config in `.prettierrc`) / Black / gofmt / … -->
-- **Linting**: <!-- TODO: ESLint (`eslint.config.ts`) / Ruff / Clippy / … -->
-- **Max line length**: <!-- TODO: 100 chars / 120 chars / … -->
+- **Language**: All documentation must be written in **en-US**.
+- **Formatting**: CommonMark Markdown; keep lines under 120 characters where practical.
+- **YAML**: Issue templates must be valid GitHub issue form schema — validate before committing.
 
 ### Naming conventions
 
 | Thing | Convention | Example |
 |---|---|---|
-| Files | <!-- kebab-case / snake_case --> | `user-service.ts` |
-| Variables & functions | <!-- camelCase / snake_case --> | `getUserById` |
-| Classes / types | PascalCase | `UserService` |
-| Constants | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT` |
-| Database tables | <!-- snake_case plural --> | `user_accounts` |
-
-### Patterns to follow
-
-<!-- TODO: Add project-specific patterns Claude should know about -->
-
-- **Error handling**: Always throw typed errors from `src/lib/errors.ts`; never swallow exceptions silently.
-- **Validation**: Use [Zod / Pydantic / …] schemas at the boundary; never trust raw input deeper in the stack.
-- **Logging**: Use the shared logger (`src/lib/logger.ts`) — never `console.log` in production code.
-- **Async**: Prefer `async/await`; avoid callback-style unless interfacing with legacy code.
-
-### Patterns to avoid
-
-<!-- TODO: Add anti-patterns specific to this repo -->
-
-- Do **not** import directly from `src/db` inside route handlers — go through the service layer.
-- Do **not** commit secrets or hardcoded URLs; use environment variables.
-- Do **not** use `any` types in TypeScript without a suppression comment explaining why.
+| Markdown files | UPPER_SNAKE_CASE | `COMMIT_CONVENTION.md` |
+| YAML issue templates | kebab-case | `bug_report.yml` |
+| Branch names | `<type>/<short-description>` | `feat/add-oauth`, `fix/null-pointer` |
 
 ---
 
-## Testing
+## Commit Conventions
 
-<!-- TODO: Describe the testing philosophy and structure -->
+The full reference is [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md). A summary follows.
 
-### Strategy
+### Types and valid scopes
 
-| Layer | Tool | Location | Notes |
-|---|---|---|---|
-| Unit | <!-- Vitest / pytest --> | `tests/unit/` | Pure logic, no I/O |
-| Integration | <!-- Supertest / httpx --> | `tests/integration/` | Tests against real DB (test container) |
-| E2E | <!-- Playwright / Cypress --> | `tests/e2e/` | Runs against staging URL |
+| Type | Purpose | Scopes |
+|---|---|---|
+| `feat` | New feature or capability | `api`, `chat`, `ui` |
+| `fix` | Bug fix | `prompt`, `model`, `auth` |
+| `prompt` | Change in prompt engineering | `system`, `few-shot`, `chain` |
+| `model` | Model configuration or version | `claude`, `params`, `tokens` |
+| `refactor` | Refactoring without behavior change | `pipeline`, `context` |
+| `docs` | Documentation only | `readme`, `api` |
+| `test` | Add or correct tests | `unit`, `eval` |
+| `chore` | Build, dependencies, tooling | `deps`, `ci` |
+| `perf` | Performance improvement | `cache`, `tokens` |
+| `ci` | Changes to the CI/CD pipeline | `github`, `deploy` |
 
-### Writing tests
+### Format
 
-- Test files live next to source files **or** in `tests/` — <!-- TODO: pick one and delete the other -->
-- Test file naming: `*.test.ts` / `*_test.py` <!-- TODO -->
-- Aim for high coverage on `src/services/**`; lower tolerance is acceptable for thin route handlers.
-- Use factories / fixtures from `tests/helpers/` rather than hand-rolling test data.
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer]
+```
+
+### Rules
+
+1. Subject line maximum **72 characters**.
+2. Use imperative mood: "add" not "adds".
+3. No period at the end of the subject.
+4. Use `prompt:` for changes in prompts, few-shot examples, or templates.
+5. Use `model:` when switching Claude versions or adjusting parameters.
+6. Reference issues in the footer: `Closes #42`.
+7. Breaking changes: add `BREAKING CHANGE` to the footer.
+
+### Examples
+
+```
+feat(chat): add streaming response support
+prompt(system): improve instruction clarity for code generation
+model(claude): upgrade to claude-sonnet-4, adjust temperature to 0.3
+fix(prompt): correct escaping for user-injected content
+perf(tokens): reduce avg token usage by 18% with prompt compression
+```
+
+> Note: `prompt` and `model` are blindbet-specific types not part of the standard Conventional Commits spec. Linters may flag them as unknown — that is expected and intentional.
 
 ---
 
 ## Pull Request Guidelines
 
-<!-- TODO: Adjust to match your team's actual process -->
-
-1. Branch off `main` using the pattern `<type>/<short-description>` (e.g. `feat/add-oauth`, `fix/null-pointer`).
+1. Branch off `main` using `<type>/<short-description>` (e.g. `feat/add-oauth`, `fix/null-pointer`).
 2. Keep PRs focused — one logical change per PR.
 3. All CI checks must pass before merging.
 4. Require at least **1** approving review (configured in branch protection).
-5. Squash-merge into `main`; use [Conventional Commits](https://www.conventionalcommits.org/) for the merge commit message.
-
-### Commit message format
-
-```
-<type>(<scope>): <short summary>
-
-[optional body]
-
-[optional footer: BREAKING CHANGE / closes #issue]
-```
-
-Types: `feat` | `fix` | `docs` | `refactor` | `test` | `chore` | `perf`
+5. Squash-merge into `main`; the merge commit message must follow Conventional Commits.
 
 ---
 
 ## Important Files & Docs
 
-<!-- TODO: Add links to the most relevant docs Claude might need -->
-
 | Resource | Link |
 |---|---|
-| API contract / OpenAPI spec | `docs/openapi.yaml` |
-| ADRs (Architecture Decision Records) | `docs/adr/` |
-| Runbook | <!-- TODO: link --> |
-| Notion / Confluence | <!-- TODO: link --> |
-| Jira / Linear board | <!-- TODO: link --> |
+| Commit conventions (canonical) | [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) |
+| Contribution guide | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| ADRs | `docs/adr/` |
+| Org overview | [`README.md`](README.md) |
+| Security reporting | [`SECURITY.md`](SECURITY.md) |
 
 ---
 
 ## Known Gotchas & Context
 
-<!-- TODO: Add anything surprising, legacy, or non-obvious that would help Claude avoid mistakes -->
-
-- <!-- e.g. "The `legacy/` directory is intentionally excluded from linting — do not add it to the ESLint config." -->
-- <!-- e.g. "We use a custom fork of [library] pinned at commit abc123 because of [bug]. Do not upgrade." -->
-- <!-- e.g. "The `USER_ID` in the DB is a UUID stored as a CHAR(36), not a native UUID column — mind implicit casts." -->
+- This repo is the **fallback** for the entire org. Changes here affect every repository that has not overridden the file locally — review carefully before merging.
+- YAML issue templates must conform to GitHub's issue form schema. Malformed templates silently break the issue creation UI without any visible error.
+- The `prompt` and `model` commit types are blindbet-specific. Do not remove or rename them to align with upstream Conventional Commits tooling.
+- `LICENSE` is a proprietary notice — do not alter it.
 
 ---
 
 ## Out of Scope
 
-<!-- TODO: Explicitly list things Claude should NOT do in this repo -->
-
-- Do not modify files under `generated/` — they are auto-generated by the build.
-- Do not change `package.json` scripts without discussing with the team first.
-- Do not alter database migration files that have already been applied to production.
+- Do **not** add service-specific instructions here — each repo should have its own `CLAUDE.md`.
+- Do **not** modify `LICENSE`.
+- Do **not** change GitHub Actions secrets, branch protection rules, or org-level settings from this file.
+- Do **not** commit generated files or secrets.
 
 ---
 
-*Last updated: May 2, 2026 by @lpiedade[https://github.com/lpiedade] *
+*Last updated: May 2, 2026 by [@lpiedade](https://github.com/lpiedade)*
