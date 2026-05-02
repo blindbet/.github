@@ -40,6 +40,3 @@
 - `model(claude): upgrade to claude-sonnet-4, adjust temperature to 0.3`
 - `fix(prompt): correct escaping for user-injected content`
 - `perf(tokens): reduce avg token usage by 18% with prompt compression`
-
----
-_Generated with Claude · Conventional Commits_
