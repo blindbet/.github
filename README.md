@@ -8,6 +8,7 @@ Repositories can override these defaults by adding their own files in the same p
 
 - `CODE_OF_CONDUCT.md` - community standards and enforcement expectations.
 - `CONTRIBUTING.md` - contribution workflow and review guidelines.
+- `LICENSE` - proprietary license notice.
 - `SECURITY.md` - private vulnerability reporting guidance.
 - `SUPPORT.md` - where to ask questions and request help.
 - `ISSUE_TEMPLATE/` - default issue forms for bugs and feature requests.
