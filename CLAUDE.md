@@ -148,10 +148,51 @@ perf(tokens): reduce avg token usage by 18% with prompt compression
 
 ---
 
+## Issue tracker
+
+**All issues for the blindbet platform live in [`blindbet/docs`](https://github.com/blindbet/docs/issues).**
+No other repository in the org keeps its own issue backlog.
+
+### Why one repo
+
+blindbet is a multi-repo platform: many repositories, one system. A per-repo tracker splits the backlog
+across one board per repository, so nobody can answer "what is open right now" without visiting all of
+them, and work that spans services (most of it) has no natural home. Centralizing in `docs` buys a single
+prioritizable queue, one place where specs and ADRs sit next to the issues that implement them, and
+cross-service dependencies that GitHub can express natively instead of as prose.
+
+`docs` is the right host because it already carries the specs (`spec/`), the decisions (`adr/`), and the
+`ready-for-agent` triage flow the issues are graded against.
+
+### Rules
+
+1. **Create every issue in `docs`**, from any repo: `gh issue create --repo blindbet/docs ...`.
+   `gh` infers the current clone when `--repo` is omitted, so pass it explicitly, always.
+2. **Label the affected service** with `repo:<name>`. This is what keeps the central backlog filterable per
+   service — it replaces the repo boundary you gave up. Cross-cutting work carries one label per touched
+   service.
+3. **Pull requests stay in their own repo.** Only issues are centralized; a PR belongs where the code is.
+4. **Cross-reference with the full form** `blindbet/docs#42`. A bare `#42` in a commit or PR body resolves
+   against the local repo and will silently point at the wrong thing.
+5. **Never enable or reopen a per-repo backlog.** If you find issues in a service repo, migrate the open ones
+   to `docs` and close the originals with a pointer comment.
+
+### Known exception: CI failure issues
+
+Service repos whose `.github/workflows/ci.yml` opens a `ci-failure` issue when `build & test` breaks on
+`main` still file it in the service repo: the workflow authenticates with the built-in `GITHUB_TOKEN`,
+which is scoped to its own repository and cannot create issues elsewhere.
+
+Redirecting them to `docs` requires an org-scoped PAT stored as an org secret. Until that secret exists, leave
+the workflows alone — pointing them at `docs` without it makes CI fail on the failure handler itself.
+
+---
+
 ## Important Files & Docs
 
 | Resource | Link |
 |---|---|
+| Issue backlog (all repos) | [`blindbet/docs` issues](https://github.com/blindbet/docs/issues) |
 | Commit conventions (canonical) | [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) |
 | Contribution guide | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
 | ADRs | `docs/adr/` |
