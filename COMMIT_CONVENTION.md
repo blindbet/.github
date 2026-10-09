@@ -32,6 +32,9 @@
 5. Use "model:" when switching Claude versions or parameters
 6. Reference issues in the footer: Closes #42
 7. Breaking changes: add BREAKING CHANGE to the footer
+8. Do not add the "Co-Authored-By: Claude ..." trailer; remove it if a tool inserts it
+9. Body bullets explain why, not what — the diff shows the what
+10. Wrap the body at 72 columns
 
 ## Examples
 
