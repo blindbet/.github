@@ -17,19 +17,6 @@
 
 ---
 
-## Tech Stack
-
-This repository contains only Markdown and YAML — there is no runtime or build step. The table below reflects org-wide tooling used across service repositories.
-
-| Layer | Technology |
-|---|---|
-| Docs format | Markdown (CommonMark), en-US |
-| Package manager | pnpm (service repos) |
-| CI/CD | GitHub Actions |
-| IaC | Terraform / Docker / Kubernetes (`infra` repo) |
-
----
-
 ## Repository Structure
 
 ```
@@ -123,6 +110,9 @@ The full reference is [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md). A summary 
 5. Use `model:` when switching Claude versions or adjusting parameters.
 6. Reference issues in the footer: `Closes #42`.
 7. Breaking changes: add `BREAKING CHANGE` to the footer.
+8. Do **not** add the `Co-Authored-By: Claude ...` trailer. If a tool inserts it, remove it before committing.
+9. Body bullets explain *why*, not what — the diff shows the what.
+10. Wrap the body at 72 columns.
 
 ### Examples
 
@@ -219,4 +209,4 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 
 ---
 
-*Last updated: May 2, 2026 by [@lpiedade](https://github.com/lpiedade)*
+*Last updated: October 9, 2026 by [@lpiedade](https://github.com/lpiedade)*
