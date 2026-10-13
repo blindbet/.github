@@ -21,7 +21,9 @@
 
 ```
 .github/
-├── ISSUE_TEMPLATE/         # bug_report.yml, feature_request.yml, config.yml
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       └── config.yml      # Org-wide issue chooser: points every repo at blindbet/docs
 ├── profile/                # GitHub org profile README
 ├── CLAUDE.md               # ← you are here (org-level AI guidance)
 ├── CODE_OF_CONDUCT.md
@@ -44,12 +46,11 @@
 git  # that's all — no build or install step
 ```
 
-### Validate issue templates (optional)
+### Validate the issue template config (optional)
 
 ```bash
-# Requires Node on PATH
-npx js-yaml ISSUE_TEMPLATE/bug_report.yml
-npx js-yaml ISSUE_TEMPLATE/feature_request.yml
+# Requires Node on PATH. Checks YAML syntax only; GitHub validates the schema when it renders the chooser.
+npx js-yaml .github/ISSUE_TEMPLATE/config.yml
 ```
 
 ---
@@ -60,15 +61,15 @@ npx js-yaml ISSUE_TEMPLATE/feature_request.yml
 
 - **Language**: All documentation must be written in **en-US**.
 - **Formatting**: CommonMark Markdown; keep lines under 120 characters where practical.
-- **YAML**: Issue templates must be valid GitHub issue form schema — validate before committing.
+- **YAML**: Issue template files must follow GitHub's issue template schema — validate before committing.
 
 ### Naming conventions
 
 | Thing | Convention | Example |
 |---|---|---|
 | Markdown files | UPPER_SNAKE_CASE | `COMMIT_CONVENTION.md` |
-| YAML issue templates | kebab-case | `bug_report.yml` |
-| Branch names | `<type>/<short-description>` | `feat/add-oauth`, `fix/null-pointer` |
+| Issue templates | snake_case | `bug_report.yml` |
+| Branch names | `<type>/<short-description>`, `<type>` from [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) | `feat/strategy-catalog-endpoint`, `ci/issue-on-failure` |
 
 ---
 
@@ -76,65 +77,26 @@ npx js-yaml ISSUE_TEMPLATE/feature_request.yml
 
 The full reference is [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md). A summary follows.
 
-### Types and valid scopes
-
-| Type | Purpose | Scopes |
-|---|---|---|
-| `feat` | New feature or capability | `api`, `chat`, `ui` |
-| `fix` | Bug fix | `prompt`, `model`, `auth` |
-| `prompt` | Change in prompt engineering | `system`, `few-shot`, `chain` |
-| `model` | Model configuration or version | `claude`, `params`, `tokens` |
-| `refactor` | Refactoring without behavior change | `pipeline`, `context` |
-| `docs` | Documentation only | `readme`, `api` |
-| `test` | Add or correct tests | `unit`, `eval` |
-| `chore` | Build, dependencies, tooling | `deps`, `ci` |
-| `perf` | Performance improvement | `cache`, `tokens` |
-| `ci` | Changes to the CI/CD pipeline | `github`, `deploy` |
-
-### Format
-
-```
-<type>(<scope>): <subject>
-
-[optional body]
-
-[optional footer]
-```
-
-### Rules
-
-1. Subject line maximum **72 characters**.
-2. Use imperative mood: "add" not "adds".
-3. No period at the end of the subject.
-4. Use `prompt:` for changes in prompts, few-shot examples, or templates.
-5. Use `model:` when switching Claude versions or adjusting parameters.
-6. Reference issues in the footer: `Closes #42`.
-7. Breaking changes: add `BREAKING CHANGE` to the footer.
-8. Do **not** add the `Co-Authored-By: Claude ...` trailer. If a tool inserts it, remove it before committing.
-9. Body bullets explain *why*, not what — the diff shows the what.
-10. Wrap the body at 72 columns.
-
-### Examples
-
-```
-feat(chat): add streaming response support
-prompt(system): improve instruction clarity for code generation
-model(claude): upgrade to claude-sonnet-4, adjust temperature to 0.3
-fix(prompt): correct escaping for user-injected content
-perf(tokens): reduce avg token usage by 18% with prompt compression
-```
-
-> Note: `prompt` and `model` are blindbet-specific types not part of the standard Conventional Commits spec. Linters may flag them as unknown — that is expected and intentional.
+- Conventional Commits: `<type>(<scope>): <subject>`. Types: `feat`, `fix`, `docs`, `refactor`, `test`, `perf`,
+  `ci`, `chore`.
+- The scope is optional and free-form: the area the change touches, in lower-case kebab-case. Reuse the scopes
+  the repository already uses (`claude`, `github`, `adr`, `db`, …).
+- Subject at most **72 characters**, imperative mood ("add", not "added"), no trailing period.
+- Body bullets explain *why*, not what — the diff shows the what. Wrap the body at 72 columns.
+- Do **not** add the `Co-Authored-By: Claude ...` trailer. If a tool inserts it, remove it before committing.
+- Reference issues by full form in the footer: `Closes blindbet/docs#42`.
+- Breaking changes: `!` after the type or scope, plus a `BREAKING CHANGE:` footer.
 
 ---
 
 ## Pull Request Guidelines
 
-1. Branch off `main` using `<type>/<short-description>` (e.g. `feat/add-oauth`, `fix/null-pointer`).
-2. Keep PRs focused — one logical change per PR.
-3. All CI checks must pass before merging.
-4. Require at least **1** approving review (configured in branch protection).
-5. Squash-merge into `main`; the merge commit message must follow Conventional Commits.
+1. Branch off `main` in the repository itself (no forks) using `<type>/<short-description>`.
+2. Keep PRs focused — one logical change per PR. The PR title is a valid Conventional Commits subject.
+3. Link the issue in the PR body with the full form: `Closes blindbet/docs#42`.
+4. All CI checks must pass before merging. Branch protection is unavailable for private repositories on the
+   free plan, so this is enforced by convention, not by GitHub.
+5. Merge with a merge commit (GitHub's default `Merge pull request #N` button); do not squash or rebase.
 
 ---
 
@@ -185,8 +147,9 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 | Issue backlog (all repos) | [`blindbet/docs` issues](https://github.com/blindbet/docs/issues) |
 | Commit conventions (canonical) | [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) |
 | Contribution guide | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
-| ADRs | `docs/adr/` |
-| Org overview | [`README.md`](README.md) |
+| Contribution workflow decision | [`blindbet/docs` → `decisions/`](https://github.com/blindbet/docs/tree/main/decisions) |
+| ADRs | [`blindbet/docs` → `adr/`](https://github.com/blindbet/docs/tree/main/adr) |
+| Repository overview | [`README.md`](README.md) |
 | Security reporting | [`SECURITY.md`](SECURITY.md) |
 
 ---
@@ -194,9 +157,16 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 ## Known Gotchas & Context
 
 - This repo is the **fallback** for the entire org. Changes here affect every repository that has not overridden the file locally — review carefully before merging.
-- YAML issue templates must conform to GitHub's issue form schema. Malformed templates silently break the issue creation UI without any visible error.
-- The `prompt` and `model` commit types are blindbet-specific. Do not remove or rename them to align with upstream Conventional Commits tooling.
-- `LICENSE` is a proprietary notice — do not alter it.
+- A file only becomes an org default if no repository defines its own copy. A repo-level `CONTRIBUTING.md` or
+  `.github/ISSUE_TEMPLATE/` silently shadows the default here — check before assuming a change reaches a repo.
+- Default issue templates are read from `.github/ISSUE_TEMPLATE/` **inside** this repository; an
+  `ISSUE_TEMPLATE/` folder at the root is ignored. The issue forms themselves live in `blindbet/docs`, the only
+  repository that accepts issues.
+- Malformed issue template YAML silently breaks the issue creation UI without any visible error.
+- Claude Code reads `CLAUDE.md` only from the working directory upward, never this file from another
+  repository. A rule that must bind elsewhere has to be restated in that repository's `CLAUDE.md`.
+- `LICENSE` is a proprietary notice — do not alter it. GitHub does not inherit `LICENSE` from this repository,
+  so every repository keeps its own copy.
 
 ---
 
@@ -209,4 +179,4 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 
 ---
 
-*Last updated: October 9, 2026 by [@lpiedade](https://github.com/lpiedade)*
+*Last updated: October 13, 2026 by [@lpiedade](https://github.com/lpiedade)*

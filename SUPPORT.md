@@ -1,29 +1,21 @@
 # Support
 
-Thanks for using and contributing to `blindbet` projects.
+## Questions, Bugs, and Requests
 
-## Questions and Help
+Open an issue in [`blindbet/docs`](https://github.com/blindbet/docs/issues/new/choose), the single tracker for
+every blindbet repository. GitHub Discussions are not enabled.
 
-Use GitHub Discussions when available for:
+- **Bugs** — use the *Bug report* form.
+- **New capabilities or improvements** — use the *Feature request* form.
+- **Questions and troubleshooting** — open an issue with the `question` label.
 
-- Usage questions.
-- Ideas that are not yet actionable issues.
-- Troubleshooting help.
-- General project conversation.
+Search existing issues first, and label the issue with `repo:<name>` for every repository it touches.
 
-If Discussions are not enabled for a repository, check that repository's README for project-specific support guidance.
+## Repository-Specific Help
 
-## Issues
-
-Use GitHub Issues for actionable work:
-
-- Reproducible bugs.
-- Feature requests with a clear motivation.
-- Documentation problems.
-- Maintenance tasks.
-
-Before opening an issue, search existing issues to avoid duplicates and include enough context for maintainers to understand the request.
+Each repository's `README.md` and `CLAUDE.md` describe how to build, run, and test it.
 
 ## Security
 
-Do not report vulnerabilities in public issues or discussions. Follow the private reporting process in `SECURITY.md`.
+Never report a vulnerability in an issue, discussion, or pull request. Follow the private process in
+[`SECURITY.md`](SECURITY.md).
