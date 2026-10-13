@@ -1,52 +1,50 @@
 # Contributing to blindbet
 
-Thanks for taking the time to contribute. This guide describes the default contribution workflow for repositories in the `blindbet` organization. Individual repositories may add more specific instructions.
+blindbet is proprietary (see `LICENSE`): contributions come from authorized collaborators only. This guide is the
+default workflow for every repository in the `blindbet` organization. A repository may add its own rules in its
+`README.md` or `CLAUDE.md`.
 
-## Before You Start
+## Issues
 
-- Check the repository README and open issues for project-specific context.
-- For bugs, search existing issues before opening a new one.
-- For larger changes, open an issue or discussion first so maintainers can help shape the approach.
+All issues live in [`blindbet/docs`](https://github.com/blindbet/docs/issues), whichever repository the work
+lands in.
+
+- Search existing issues before opening a new one.
+- Label the issue with `repo:<name>` for every repository it touches.
+- For larger changes, agree on the approach in the issue before writing code.
 
 ## Workflow
 
-1. Fork the repository.
-2. Create a branch from the default branch.
-3. Make a focused change.
-4. Add or update tests when behavior changes.
-5. Run the repository's documented checks locally.
-6. Open a pull request with a clear description and linked issue when applicable.
+1. Branch off `main` in the repository itself — there are no forks.
+2. Name the branch `<type>/<short-description>`, with a type from [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md):
+   `feat/strategy-catalog-endpoint`, `fix/orders-ui-strategy`, `docs/adr-0043-options-scope`,
+   `ci/issue-on-failure`.
+3. Make one focused change. Add or update tests when behavior changes.
+4. Run the repository's documented checks locally (see its `README.md` or `CLAUDE.md`).
+5. Open a pull request in the same repository and link its issue with the full form:
+   `Closes blindbet/docs#<number>`.
 
-## Branch Naming
+## Commits
 
-Use short, descriptive branch names:
-
-- `feature/add-payment-flow`
-- `fix/login-error-state`
-- `docs/update-api-examples`
-- `chore/refresh-dependencies`
-
-## Commit Style
-
-Write commits in the imperative mood and keep the subject concise:
-
-- `Add bug report issue form`
-- `Fix account validation error`
-- `Update contribution guidelines`
-
-When a change needs more context, add a short commit body explaining why the change was made and any important tradeoffs.
+Follow [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md): Conventional Commits, an imperative subject of at most
+72 characters, a body that explains *why*, and no `Co-Authored-By: Claude ...` trailer.
 
 ## Pull Requests
 
-Pull requests should be small enough to review comfortably and should include:
+Pull requests should be small enough to review comfortably. The title is itself a valid commit subject, and the
+description includes:
 
-- A summary of what changed.
-- The type of change.
+- A summary of what changed and why.
 - How the change was tested.
 - Screenshots or recordings for user-facing UI changes.
 - Any follow-up work or known limitations.
 
-Maintainers may request changes before merging. Please keep the discussion focused, respectful, and grounded in the code and user impact.
+## Reviews and Merging
+
+- Every CI check must be green before merging. Branch protection is unavailable for private repositories on the
+  free plan, so this is enforced by convention, not by GitHub.
+- Merge with a merge commit (GitHub's default button); do not squash or rebase.
+- A pull request may be closed if it is inactive, out of scope, or superseded by another approach.
 
 ## Coding Conventions
 
@@ -55,9 +53,3 @@ Maintainers may request changes before merging. Please keep the discussion focus
 - Keep unrelated refactors out of feature and bug-fix pull requests.
 - Document behavior that is non-obvious or important for maintainers.
 - Do not commit secrets, private keys, credentials, or generated local configuration.
-
-## Reviews and Merging
-
-Maintainers review pull requests for correctness, maintainability, security, test coverage, and fit with project direction. A pull request may be closed if it is inactive, out of scope, or superseded by another approach.
-
-Thank you for helping improve `blindbet`.

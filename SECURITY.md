@@ -2,36 +2,32 @@
 
 ## Supported Versions
 
-The `blindbet` organization publishes security fixes for supported projects and versions as maintainers define them. If a repository has its own `SECURITY.md`, that repository-specific policy takes precedence.
-
-| Version | Supported |
-| ------- | --------- |
-| `main` | Yes |
-| Older releases | TODO: define per repository |
+Only the `main` branch of each repository is supported. Fixes land on `main`; there are no maintained release
+branches. If a repository has its own `SECURITY.md`, that policy takes precedence.
 
 ## Reporting a Vulnerability
 
-Please do not report security vulnerabilities in public issues, discussions, or pull requests.
+Never report a vulnerability in a public issue, discussion, or pull request.
 
-Use GitHub Security Advisories to report vulnerabilities privately:
+blindbet's service repositories are private, and GitHub's private vulnerability reporting is only available on
+public repositories. Report privately through this public repository instead:
 
-1. Open the affected repository on GitHub.
-2. Go to the **Security** tab.
-3. Select **Report a vulnerability**.
-4. Include enough detail for maintainers to reproduce and assess the issue.
+1. Open [a new security advisory for `blindbet/.github`](https://github.com/blindbet/.github/security/advisories/new).
+2. Name the affected repository in the title.
+3. Include enough detail for the maintainer to reproduce and assess the issue.
 
-If GitHub Security Advisories are not available for the affected repository, contact the maintainers at `TODO: security@blindbet.example`.
+The advisory is visible only to you and the organization owner,
+[@lpiedade](https://github.com/lpiedade).
 
 ## What to Include
 
-Please include:
-
-- Affected repository and version, commit, or deployment.
-- A description of the vulnerability and potential impact.
+- Affected repository and commit, branch, or deployment.
+- A description of the vulnerability and its potential impact.
 - Steps to reproduce or proof-of-concept details.
 - Any known mitigations.
-- Whether the vulnerability is being actively exploited or publicly disclosed.
+- Whether the vulnerability is being actively exploited or has been publicly disclosed.
 
 ## Response Expectations
 
-Maintainers will acknowledge valid reports as soon as possible, investigate the issue, and coordinate disclosure and remediation with the reporter. Timelines may vary depending on severity, complexity, and project availability.
+The maintainer acknowledges valid reports as soon as possible, investigates, and coordinates remediation and
+disclosure with the reporter. Timelines vary with severity and complexity.
