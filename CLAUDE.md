@@ -69,7 +69,7 @@ npx js-yaml .github/ISSUE_TEMPLATE/config.yml
 |---|---|---|
 | Markdown files | UPPER_SNAKE_CASE | `COMMIT_CONVENTION.md` |
 | Issue templates | snake_case | `bug_report.yml` |
-| Branch names | `<type>/<short-description>`, `<type>` from [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) | `feat/strategy-catalog-endpoint`, `ci/issue-on-failure` |
+| Branch names | `<type>/<short-description>`, `<type>` from [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) | `feat/settings-page`, `ci/issue-on-failure` |
 
 ---
 
@@ -113,8 +113,8 @@ them, and work that spans services (most of it) has no natural home. Centralizin
 prioritizable queue, one place where specs and ADRs sit next to the issues that implement them, and
 cross-service dependencies that GitHub can express natively instead of as prose.
 
-`docs` is the right host because it already carries the specs (`spec/`), the decisions (`adr/`), and the
-`ready-for-agent` triage flow the issues are graded against.
+`docs` is the right host because it already carries the specifications, the decisions, and the `ready-for-agent`
+triage flow the issues are graded against.
 
 ### Rules
 
@@ -147,8 +147,7 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 | Issue backlog (all repos) | [`blindbet/docs` issues](https://github.com/blindbet/docs/issues) |
 | Commit conventions (canonical) | [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md) |
 | Contribution guide | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
-| Contribution workflow decision | [`blindbet/docs` → `decisions/`](https://github.com/blindbet/docs/tree/main/decisions) |
-| ADRs | [`blindbet/docs` → `adr/`](https://github.com/blindbet/docs/tree/main/adr) |
+| Specifications, ADRs, decisions | `blindbet/docs`, private — never linked from this repository |
 | Repository overview | [`README.md`](README.md) |
 | Security reporting | [`SECURITY.md`](SECURITY.md) |
 
@@ -163,6 +162,10 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
   `ISSUE_TEMPLATE/` folder at the root is ignored. The issue forms themselves live in `blindbet/docs`, the only
   repository that accepts issues.
 - Malformed issue template YAML silently breaks the issue creation UI without any visible error.
+- This repository is **public**, its commits and pull requests included; the service repositories and
+  `blindbet/docs` are private. Its own content never cites a private record (a specification, ADR, or decision) by
+  ID, link, or path, and never describes internal work: examples use neutral names such as `feat/settings-page`.
+  Citing ADRs and `blindbet/docs` issues, as the rules above describe, is for the private repositories.
 - Claude Code reads `CLAUDE.md` only from the working directory upward, never this file from another
   repository. A rule that must bind elsewhere has to be restated in that repository's `CLAUDE.md`.
 - `LICENSE` is a proprietary notice — do not alter it. GitHub does not inherit `LICENSE` from this repository,
@@ -179,4 +182,4 @@ the workflows alone — pointing them at `docs` without it makes CI fail on the 
 
 ---
 
-*Last updated: October 13, 2026 by [@lpiedade](https://github.com/lpiedade)*
+*Last updated: October 24, 2026 by [@lpiedade](https://github.com/lpiedade)*

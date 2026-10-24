@@ -61,19 +61,19 @@ Scopes in common use across the org:
 
 ```
 ci(github): open a tracking issue when CI breaks on main
-docs(adr): propose ADR-0043 listed options scope from Stage 3
-feat(dashboard): wire StrategyPnlPanel to live per-strategy P&L
-fix(qarp-ibov): correct IBOV constituent list to official B3 composition
+docs(adr): record why identifiers are UUIDs
+feat(web): show a loading state while a page fetches data
+fix(db): add the missing index on a foreign key
 chore(claude): enable graphify native RAG integration
 ```
 
 With a body:
 
 ```
-docs(claude): fix title, Java setup, and service commands
+docs(claude): fix the title and the run command
 
-- The file was titled trading-engine and had no overview of this
-  service
-- make restart-risk and scripts/restart.sh do not exist; point at
-  scripts/run.sh and infra's services.sh instead
+- The file was titled after another repository and had no overview
+  of this one
+- make restart and scripts/restart.sh do not exist; point at
+  scripts/run.sh instead
 ```
