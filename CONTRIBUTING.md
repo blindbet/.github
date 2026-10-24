@@ -17,8 +17,7 @@ lands in.
 
 1. Branch off `main` in the repository itself — there are no forks.
 2. Name the branch `<type>/<short-description>`, with a type from [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md):
-   `feat/strategy-catalog-endpoint`, `fix/orders-ui-strategy`, `docs/adr-0043-options-scope`,
-   `ci/issue-on-failure`.
+   `feat/settings-page`, `fix/login-redirect`, `docs/adr-uuid-identifiers`, `ci/issue-on-failure`.
 3. Make one focused change. Add or update tests when behavior changes.
 4. Run the repository's documented checks locally (see its `README.md` or `CLAUDE.md`).
 5. Open a pull request in the same repository and link its issue with the full form:
